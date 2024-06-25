@@ -20,14 +20,13 @@ public static class Helper
 
     public static Dictionary<string, Texture2D> TextureCache = new Dictionary<string, Texture2D>();
 
-    public static Texture2D LoadTexture(string path)
+    public static Texture2D LoadTexture(string path, ref CypherTranscoder transcoder)
     {
         Texture2D result;
-
         if (!TextureCache.TryGetValue(path, out result))
         {
             result = new Texture2D(0, 0);
-            result.LoadImage(File.ReadAllBytes(path));
+            result.LoadImage(transcoder.Transcode(path));
             result.name = Path.GetFileNameWithoutExtension(path);
             TextureCache[path] = result;
         }
