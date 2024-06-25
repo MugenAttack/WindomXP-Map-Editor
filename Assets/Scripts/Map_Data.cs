@@ -278,7 +278,7 @@ public class Map_Data : MonoBehaviour
 								if (f.Extension == ".dds")
 									mat.mainTexture = DdsTextureLoader.LoadTexture(f.FullName);
 								else
-									mat.mainTexture = Helper.LoadTexture(f.FullName);
+									mat.mainTexture = Helper.LoadTexture(f.FullName, ref transcoder);
 							}
 							catch
 							{
@@ -343,7 +343,7 @@ public class Map_Data : MonoBehaviour
 									mat.SetTextureScale("_MainTex", new Vector2(1, -1));
 								}
 								else
-									mat.mainTexture = Helper.LoadTexture(f.FullName);
+									mat.mainTexture = Helper.LoadTexture(f.FullName, ref transcoder);
 							}
 							catch
 							{

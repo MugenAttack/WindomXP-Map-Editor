@@ -18,12 +18,15 @@ public class UI_Load : MonoBehaviour
     public GameObject pref;
     public InputField folderLoc;
     public UI_Tabs tabs;
+    public CypherTranscoder transcoder; // transcoder 変数を追加
+
     // Start is called before the first frame update
     void Start()
     {
         menu.SetActive(false);
         editPanel.SetActive(false);
         mapDD.ClearOptions();
+        transcoder = new CypherTranscoder(); // transcoder を初期化
         if (File.Exists("Settings.txt"))
         {
             StreamReader sr = new StreamReader("Settings.txt");
@@ -73,7 +76,7 @@ public class UI_Load : MonoBehaviour
         if (File.Exists(Path.Combine(folder, list[mapDD.value], "SelectImage.png")))
         {
             
-            Texture2D tex = Helper.LoadTexture(Path.Combine(folder, list[mapDD.value], "SelectImage.png"));
+            Texture2D tex = Helper.LoadTexture(Path.Combine(folder, list[mapDD.value], "SelectImage.png"), ref transcoder);
             Sprite st = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0, 0));
 
             selectImage.sprite = st;
